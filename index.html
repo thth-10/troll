@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full màn hình</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000; /* Nền đen để tạo độ tương phản mạnh khi chớp */
+        }
+        img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            display: block;
+            /* Tốc độ nhấp nháy 0.08s cực nhanh */
+            animation: nhapNhayManh 0.05s infinite alternate;
+        }
+
+        @keyframes nhapNhayManh {
+            0% {
+                opacity: 1;
+                filter: brightness(1.5) contrast(1.8); /* Sáng gắt và tăng tương phản */
+                transform: scale(1.03); /* Phóng nhẹ tạo cảm giác giật */
+            }
+            50% {
+                opacity: 0.1;
+                filter: invert(1); /* Đảo ngược màu tạo hiệu ứng chớp lóa */
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://genk.mediacdn.vn/2018/6/15/7-15290319533661918916725.jpg" alt="Hình ảnh">
+
+</body>
+</html>
