@@ -13,26 +13,26 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #000; /* Nền đen để tạo độ tương phản mạnh khi chớp */
+            background-color: #000;
+            cursor: pointer;
         }
         img {
             width: 100vw;
             height: 100vh;
             object-fit: cover;
             display: block;
-            /* Tốc độ nhấp nháy 0.08s cực nhanh */
-            animation: nhapNhayManh 0.05s infinite alternate;
+            animation: nhapNhayManh 0.08s infinite alternate;
         }
 
         @keyframes nhapNhayManh {
             0% {
                 opacity: 1;
-                filter: brightness(1.5) contrast(1.8); /* Sáng gắt và tăng tương phản */
-                transform: scale(1.03); /* Phóng nhẹ tạo cảm giác giật */
+                filter: brightness(1.5) contrast(1.8);
+                transform: scale(1.03);
             }
             50% {
                 opacity: 0.1;
-                filter: invert(1); /* Đảo ngược màu tạo hiệu ứng chớp lóa */
+                filter: invert(1);
             }
             100% {
                 opacity: 0;
@@ -44,6 +44,28 @@
 <body>
 
     <img src="https://genk.mediacdn.vn/2018/6/15/7-15290319533661918916725.jpg" alt="Hình ảnh">
+
+    <!-- Thẻ âm thanh phát lặp lại liên tục -->
+    <audio id="nhacNen" src="doama.mp3" autoplay loop preload="auto"></audio>
+
+    <script>
+        const audio = document.getElementById("nhacNen");
+        audio.volume = 1.0; // Đặt âm lượng tối đa (100%)
+
+        function phatNhac() {
+            audio.play().catch(() => {
+                // Nếu trình duyệt chặn tự động phát, chờ tương tác đầu tiên
+            });
+        }
+
+        // 1. Thử phát ngay khi trang vừa tải xong
+        window.addEventListener("load", phatNhac);
+
+        // 2. Dự phòng: Chỉ cần người dùng chạm màn hình, click chuột hoặc bấm phím là phát ngay
+        ["click", "touchstart", "keydown", "mousemove"].forEach(suKien => {
+            document.addEventListener(suKien, phatNhac, { once: true });
+        });
+    </script>
 
 </body>
 </html>
